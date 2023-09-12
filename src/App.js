@@ -7,6 +7,7 @@ import RegisterAlumni from './pages/Public/RegisterAlumni';
 import RegisterCompany from './pages/Public/RegisterCompany';
 import ForgotPassword from './pages/Public/ForgotPassword';
 import UnprotectedRoutes from './utils/unProtectedRoutes';
+import Layout from './pages/Admin/Layout';
 
 
 const App = () => {

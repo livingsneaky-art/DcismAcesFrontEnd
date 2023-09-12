@@ -33,7 +33,6 @@ export const SignUpCompany = async (dispatch, credentials) => {
         console.log('Error:', error);
         const errorMessage = error.response?.data || 'An error occured while signing up';
         dispatch(authenticationError(errorMessage));
-
     }
 }
 
