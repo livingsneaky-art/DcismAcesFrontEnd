@@ -8,10 +8,10 @@ const Navbar = () => {
     const dispatch = useDispatch();
 
     return <Nav className='navbar' style={{ backgroundColor: '#e4fff2' }}>
-        <h1 style={{ fontFamily: 'Brush Script MT, cursive' }}>My Expenses</h1>
+        <h1 style={{ fontFamily: 'Brush Script MT, cursive' }}>DCISM ACES</h1>
         {isLoggedIn
             ?
-            <div style={{display:'flex', alignItems:'center'}}>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
                 <NavLink style={{ marginLeft: '1rem' }} variant='link' to='/'>Home</NavLink>
                 <Button variant='link' href='/signin' onClick={() => { dispatch(logout()) }}>Log out</Button>
             </div>

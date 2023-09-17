@@ -2,6 +2,7 @@ import { React, useState } from 'react';
 import { Form, Button, InputGroup, FormControl } from 'react-bootstrap';
 import { SignUp } from '../services/authentication';
 import { useDispatch } from 'react-redux';
+import ThirdPartySignIns from './ThirdPartySignIns';
 
 const SignUpPage = () => {
     const [username, setUsername] = useState('');
@@ -39,6 +40,7 @@ const SignUpPage = () => {
                 style={{ margin: 'auto', display: 'block', width: '10rem' }}
                 disabled={password !== confirmPassword || password.length <= 0}>Sign Up</Button>
         </Form>
+        <ThirdPartySignIns />
     </div>
 };
 

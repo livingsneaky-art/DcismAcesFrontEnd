@@ -1,34 +1,78 @@
-import { React, useEffect } from 'react';
-import HomePage from './components/HomePage';
-import Navbar from './components/Navbar';
-import SignInPage from './components/SignInPage';
-import SignUpPage from './components/SignUpPage';
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { userAuthenticated } from './app/authenticationSlice';
+import React, { useMemo } from 'react';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import Login from './pages/Public/Login';
+import LandingPage from './pages/Public/LandingPage';
+import RegisterAlumni from './pages/Public/RegisterAlumni';
+import RegisterCompany from './pages/Public/RegisterCompany';
+import ForgotPassword from './pages/Public/ForgotPassword';
+import UnprotectedRoutes from './utils/unProtectedRoutes';
+import ChangePassword from './pages/Public/ChangePassword';
+import Layout from './pages/Admin/Layout';
+import { ColorModeContext, useMode } from "./theme";
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import Dashboard from './pages/Admin/Dashboard';
+import Jobs from './pages/Admin/Jobs';
+import VerifyCompany from './pages/Admin/VerifyCompany';
+import Companies from './pages/Admin/Company';
+import Alumni from './pages/Admin/Alumni';
 
 
 const App = () => {
-  const { isLoggedIn } = useSelector(state => state.authenticationSlice);
-  const dispatch = useDispatch();
+  const { theme, toggleColorMode } = useMode();
 
-  useEffect(() => {
-    const token = sessionStorage.getItem('token');
-    if (token !== undefined && token !== null) {
-      dispatch(userAuthenticated({ token: token }))
-    }
-  }, [dispatch]);
+  const colorModeContextValue = useMemo(
+    () => ({
+      toggleColorMode: toggleColorMode,
+    }),
+    [toggleColorMode]
+  );
+
 
   return (
-    <BrowserRouter>
-    <Navbar />
-      <Routes>
-        <Route path="/" element={isLoggedIn ? <HomePage /> : <SignInPage />} />
-        <Route path="/signup" element={isLoggedIn ? <Navigate to='/' /> : <SignUpPage />} />
-        <Route path="/signin" element={isLoggedIn ? <Navigate to='/' /> : <SignInPage />} />
+    <ColorModeContext.Provider value={colorModeContextValue}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <div className="app">
+          <BrowserRouter>
+            {/* <Navbar /> */}
+
+            <Routes>
+
+              <Route element={<UnprotectedRoutes />}>
+                <Route path="/" element={<LandingPage />} />
+                <Route path="/signin" exact element={<Login />} />
+                <Route path="/signup" element={<RegisterAlumni />} />
+                <Route path="/signup/company" element={<RegisterCompany />} />
+                <Route path="/forgotpassword" element={<ForgotPassword />} />
+                <Route path="/changepassword" element={<ChangePassword />} />
+              </Route>
+
+              {/* 
+        <Route path="/dashboard" element={isLoggedIn ? <ChangePassword /> : <Login />} />
+        <Route path="/login" element={isLoggedIn ? <Navigate to='/dashboard' /> : <Login />} />
+        <Route path="/register" element={isLoggedIn ? <Navigate to='/dashboard' /> : <RegisterAlumni />} />
         <Route path="*" element={<h2>Page not found!</h2>} />
-      </Routes>
-    </BrowserRouter>
+      */}
+
+              <Route element={<Layout />}>
+                <Route path="/admin" element={<Navigate to="/dashboard" replace />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/jobs" element={<Jobs />} />
+                <Route path="/verification_company" element={<VerifyCompany />} />
+                <Route path="/companies" element={<Companies />} />
+                <Route path="/pending_jobs" element={<Alumni />} />
+                <Route path="/verification_alumni" element={<Alumni />} />
+                <Route path="/faq" element={<Alumni />} />
+                <Route path="/events" element={<Alumni />} />
+                <Route path="/calendar" element={<Alumni />} />
+                <Route path="/alumni" element={<Alumni />} />
+              </Route>
+
+            </Routes>
+          </BrowserRouter>
+        </div>
+      </ThemeProvider>
+    </ColorModeContext.Provider>
   );
 }
 
