@@ -71,7 +71,7 @@ const Login = () => {
 
                 {message && <Typography className="text-red-500 mx-4">{message}</Typography>}
 
-                <div className="flex text-sm mb-4">
+                <div className="flex text-sm my-4">
                     <p>
                         Forgot Password?
                         <span className="text-[15px] ml-2">

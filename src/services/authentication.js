@@ -7,12 +7,30 @@ const axiosInstance = axios.create({
 
 export const SignUpCompany = async (dispatch, credentials) => {
     try {
-        const data = await axiosInstance.post('/signup/company', credentials);
-        //const { data } = response;
-        console.log(data);
-        //  if (response.data === 201) {
-        dispatch(userAuthenticated(data.data));
-        //  }
+        const response = await axiosInstance.post('/signup/company', credentials);
+        console.log(response);
+
+        if (response.data.isSucceed) {
+
+            dispatch(
+                userAuthenticated({
+                    isSucceed: response.data.isSucceed,
+                    message: null,
+                    email: response.data.email,
+                    token: response.data.token,
+                    firstName: response.data.firstName,
+                    lastName: response.data.lastName,
+                    role: response.data.role,
+                })
+            );
+        } else {
+            dispatch(
+                authenticationError({
+                    message: response.data.message,
+                })
+            );
+        }
+
 
     } catch (error) {
         console.error('Error:', error);
@@ -23,12 +41,31 @@ export const SignUpCompany = async (dispatch, credentials) => {
 
 export const SignUpAlumni = async (dispatch, credentials) => {
     try {
-        const data = await axiosInstance.post('/signup/alumni', credentials);
-        //const { data } = response;
-        console.log(data);
-        //  if (response.data === 201) {
-        dispatch(userAuthenticated(data.data));
-        //  }
+        const response = await axiosInstance.post('/signup/alumni', credentials);
+        console.log(response);
+
+        if (response.data.isSucceed) {
+
+            dispatch(
+                userAuthenticated({
+                    isSucceed: response.data.isSucceed,
+                    message: null,
+                    email: response.data.email,
+                    token: response.data.token,
+                    firstName: response.data.firstName,
+                    lastName: response.data.lastName,
+                    role: response.data.role,
+                })
+            );
+        } else {
+            dispatch(
+                authenticationError({
+                    message: response.data.message,
+                })
+            );
+        }
+
+
 
     } catch (error) {
         console.log('Error:', error);
@@ -49,6 +86,9 @@ export const SignIn = async (dispatch, credentials) => {
                     message: null,
                     email: response.data.email,
                     token: response.data.token,
+                    firstName: response.data.firstName,
+                    lastName: response.data.lastName,
+                    role: response.data.role,
                 })
             );
         } else {
@@ -66,8 +106,6 @@ export const SignIn = async (dispatch, credentials) => {
     }
 }
 
-
-
 export const SignUpGoogle = async (dispatch, token) => {
     try {
         // api call        
@@ -77,5 +115,3 @@ export const SignUpGoogle = async (dispatch, token) => {
         console.log('Error!')
     }
 }
-
-
