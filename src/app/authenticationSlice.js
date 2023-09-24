@@ -11,7 +11,7 @@ const initialState = {
     firstName: localStorage.getItem('firstName') || null,
     lastName: localStorage.getItem('lastName') || null,
     role: localStorage.getItem('role') || null,
-};
+  };
 
 export const authenticationSlice = createSlice({
     name: 'authentication',
@@ -33,6 +33,14 @@ export const authenticationSlice = createSlice({
             state.lastName = action.payload.lastName;
             state.role = action.payload.role;
         },
+        userResetPassword: (state, action) => {
+            state.isSucceed = action.payload.isSucceed;
+            state.message = action.payload.message;
+        },
+        userChangePassword: (state, action) => {
+            state.isSucceed = action.payload.isSucceed;
+            state.message = action.payload.message;;
+        },
         authenticationError: (state, action) => {
             const { message } = action.payload;
             state.isSucceed = false;
@@ -40,13 +48,13 @@ export const authenticationSlice = createSlice({
             state.email = null;
             state.token = null;
         },
-        logout: (state) => {
+        logout: () => {
             localStorage.clear();
-            state = initialState;
+            return initialState;
         },
     },
 });
 
-export const { userAuthenticated, logout, authenticationError } = authenticationSlice.actions;
+export const { userAuthenticated, logout, authenticationError, userResetPassword, userChangePassword } = authenticationSlice.actions;
 
 export default authenticationSlice.reducer;

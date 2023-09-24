@@ -1,39 +1,59 @@
-import { React, useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { GetExpenses } from '../../services/expenses';
-import { Button, Row, Col } from 'react-bootstrap';
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
 import ExpenseForm from './ExpenseForm';
+import { GetExpenses } from '../../services/expenses';
 
 const ExpenseList = () => {
     const dispatch = useDispatch();
-    const expenses = useSelector(state => state.expensesSlice.expenses);
+    const expenses = useSelector((state) => state.expensesSlice.expenses);
 
     useEffect(() => {
         GetExpenses(dispatch);
-    }, [dispatch]); // Add 'dispatch' to the dependency array
+    }, [dispatch]);
 
-    return expenses.map(e =>
-        <div key={e.id} style={{ marginBottom: '1rem' }}>
-            <ListRow expense={e} />
-        </div>
+    return (
+        <Grid container spacing={2}>
+            {expenses.map((e) => (
+                <Grid item xs={12} key={e.id}>
+                    <ExpenseListItem expense={e} />
+                </Grid>
+            ))}
+        </Grid>
     );
-
 };
+
 export default ExpenseList;
 
-const ListRow = ({ expense }) => {
+const ExpenseListItem = ({ expense }) => {
     const [isEditing, setIsEditing] = useState(false);
+    return (
+        <Card variant="outlined">
+            <CardContent>
+                <Typography variant="h6" component="div">
+                    {expense.description}
+                </Typography>
+                <Typography color="textSecondary">${expense.amount}</Typography>
+                <Button
+                    variant="contained"
+                    color="warning"
+                    onClick={() => setIsEditing(!isEditing)}
+                >
+                    Edit
+                </Button>
+                <Divider sx={{ mt: 2 }} />
+                {isEditing ? (
+                    <ExpenseForm expense={expense} setIsEditing={setIsEditing} />
+                ) : null}
+            </CardContent>
+        </Card>
+    );
+};
 
-    return isEditing
-    ? <ExpenseForm expense = {expense} setIsEditing={setIsEditing} />
-    :    <div>
-            <Row>
-                <Col>{expense.description}</Col>
-                <Col>${expense.amount}</Col>
-                <Button variant='warning' onClick={() => setIsEditing(!isEditing)}>Edit</Button>
-            </Row>
-            <hr />
-        </div>
-}
 
 

@@ -1,4 +1,4 @@
-import { authenticationError, userAuthenticated } from '../app/authenticationSlice';
+import { authenticationError, userAuthenticated, userResetPassword, userChangePassword } from '../app/authenticationSlice';
 import axios from 'axios';
 
 const axiosInstance = axios.create({
@@ -8,7 +8,6 @@ const axiosInstance = axios.create({
 export const SignUpCompany = async (dispatch, credentials) => {
     try {
         const response = await axiosInstance.post('/signup/company', credentials);
-        console.log(response);
 
         if (response.data.isSucceed) {
 
@@ -42,7 +41,6 @@ export const SignUpCompany = async (dispatch, credentials) => {
 export const SignUpAlumni = async (dispatch, credentials) => {
     try {
         const response = await axiosInstance.post('/signup/alumni', credentials);
-        console.log(response);
 
         if (response.data.isSucceed) {
 
@@ -77,7 +75,6 @@ export const SignUpAlumni = async (dispatch, credentials) => {
 export const SignIn = async (dispatch, credentials) => {
     try {
         const response = await axiosInstance.post('/signin', credentials);
-        console.log(response);
 
         if (response.data.isSucceed) {
             dispatch(
@@ -113,5 +110,57 @@ export const SignUpGoogle = async (dispatch, token) => {
         dispatch(userAuthenticated(data));
     } catch {
         console.log('Error!')
+    }
+}
+
+export const resetPassword = async (dispatch, credentials) => {
+    try {
+        const response = await axiosInstance.post('/forgotpassword', credentials);
+        console.log(response)
+        if (response.data.isSucceed) {
+            dispatch(
+                userResetPassword({
+                    isSucceed: response.data.isSucceed,
+                    message: response.data.message,
+                })
+            );
+        } else {
+            dispatch(
+                authenticationError({
+                    message: response.data.message,
+                })
+            );
+        }
+
+    } catch (error) {
+        console.error('Error:', error);
+        const errorMessage = error.response?.data || 'An error occurred while signing in.';
+        dispatch(authenticationError({ message: errorMessage }));
+    }
+}
+
+export const changePassword  = async (dispatch, credentials) => {
+    try {
+        const response = await axiosInstance.post('/changepassword', credentials);
+
+        if (response.data.isSucceed) {
+            dispatch(
+                userChangePassword({
+                    isSucceed: response.data.isSucceed,
+                    message: response.data.message,
+                })
+            );
+        } else {
+            dispatch(
+                authenticationError({
+                    message: response.data.message,
+                })
+            );
+        }
+
+    } catch (error) {
+        console.error('Error:', error);
+        const errorMessage = error.response?.data || 'An error occurred while signing in.';
+        dispatch(authenticationError({ message: errorMessage }));
     }
 }

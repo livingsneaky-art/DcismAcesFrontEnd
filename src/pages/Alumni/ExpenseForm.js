@@ -1,7 +1,13 @@
-import { React, useState, useEffect } from 'react';
-import { Form, Row, Col, Button } from "react-bootstrap";
-import { EditExpense, NewExpense, DeleteExpense } from '../../services/expenses';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+import { EditExpense, NewExpense, DeleteExpense } from '../../services/expenses';
 
 const ExpenseForm = ({ expense, setIsEditing }) => {
     const descriptions = ['Groceries', 'Credit Card', 'Student Loans', 'Eating out', 'Gas'];
@@ -11,53 +17,70 @@ const ExpenseForm = ({ expense, setIsEditing }) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if(expense !== undefined) {
+        if (expense !== undefined) {
             setIsNewExpense(false);
             setAmount(expense.amount);
-        }
-        else {
+        } else {
             setIsNewExpense(true);
         }
     }, [expense]);
 
-    return <Form
-        onSubmit={event => {
-            event.preventDefault();
-            if(isNewExpense) {
-                NewExpense(dispatch, {description: description, amount: Number(amount)});
-            }
-            else {
-                EditExpense(dispatch, {id: expense.id, description: description, amount: Number(amount)});
-                setIsEditing(false);
-            }
-        }}
-    >
-        <Row>
-            <Col>
-                <Form.Label>Description</Form.Label>
-                <Form.Control as='select'
-                    onChange={event => setDescription(event.target.value)}>
-                    {descriptions.map((d, idx) => <option key={idx}>{d}</option>)}
-                </Form.Control>
-            </Col>
-            <Col>
-                <Form.Label>Amount</Form.Label>
-                <Form.Control type='number' step='0.01'
-                    placeholder={amount}
-                    onChange={event => setAmount(event.target.value)} />
-            </Col>
-            <div style={{ marginTop: 'auto' }}>
-                {isNewExpense
-                    ? <Button variant='primary' type='submit'>Add</Button>
-                    : <div>
-                        <Button style={{ marginRight: '2px'}} variant='danger'
-                        onClick={() => DeleteExpense(dispatch, expense)}>Delete</Button>
-                        <Button style={{ marginRight: '2px'}} variant='success' type='submit'>Save</Button>
-                        <Button style={{ marginRight: '2px'}} variant='default' onClick={() => setIsEditing(false)}>Cancel</Button>
-                    </div>}
-            </div>
-        </Row>
-    </Form>
-}
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        if (isNewExpense) {
+            NewExpense(dispatch, { description: description, amount: Number(amount) });
+        } else {
+            EditExpense(dispatch, { id: expense.id, description: description, amount: Number(amount) });
+            setIsEditing(false);
+        }
+    };
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <Stack direction="row" spacing={2}>
+                <FormControl fullWidth>
+                    <InputLabel>Description</InputLabel>
+                    <Select
+                        value={description}
+                        onChange={(event) => setDescription(event.target.value)}
+                    >
+                        {descriptions.map((d, idx) => (
+                            <MenuItem key={idx} value={d}>
+                                {d}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
+                <TextField
+                    fullWidth
+                    label="Amount"
+                    type="number"
+                    step="0.01"
+                    value={amount}
+                    onChange={(event) => setAmount(event.target.value)}
+                />
+                <Stack spacing={1} direction="row" alignItems="center">
+                    {isNewExpense ? (
+                        <Button variant="contained" type="submit">
+                            Add
+                        </Button>
+                    ) : (
+                        <>
+                            <Button variant="contained" color="error" onClick={() => DeleteExpense(dispatch, expense)}>
+                                Delete
+                            </Button>
+                            <Button variant="contained" color="success" type="submit">
+                                Save
+                            </Button>
+                            <Button variant="contained" onClick={() => setIsEditing(false)}>
+                                Cancel
+                            </Button>
+                        </>
+                    )}
+                </Stack>
+            </Stack>
+        </form>
+    );
+};
 
 export default ExpenseForm;

@@ -1,30 +1,49 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 import { FaKey } from "react-icons/fa";
 import Publicformheader from "../../../components/formheader/publicformheader";
 import placeholder from '../../../assets/capstole.webp'
+import { changePassword } from "../../../services/authentication";
+import { logout } from '../../../app/authenticationSlice';
 import {
     Button, InputAdornment,
     TextField,
     Typography,
 } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 const ChangePassword = () => {
+    const { isSucceed, message } = useSelector((state) => state.authentication);
+    const { Token } = useParams();
     const error = useSelector((state) => state.authentication.error)
 
-    const [password, setPassword] = useState("");
+    const [NewPassword, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        console.log({ password, confirmPassword })
-    };
+    const dispatch = useDispatch();
 
     return (
-
-        <Publicformheader imageSrc={placeholder} title="Change Password" description="Please use a strong combination">
-            <form onSubmit={handleSubmit}>
+        isSucceed ? (
+            <div>
+                <h1>Email Sent! {message}</h1>
+                <Button
+                    variant="link"
+                    href="/signin"
+                    onClick={() => {
+                        dispatch(logout()); // Dispatch the logout action here
+                    }}
+                    style={{ marginLeft: '1rem', color: '#000' }}
+                >
+                    Log out
+                </Button>
+            </div>
+            
+        ) : (
+            <Publicformheader imageSrc={placeholder} title="ChangePassword" description="Please use a strong combination">
+            <form onSubmit={async (event) => {
+                    event.preventDefault();
+                    changePassword(dispatch, { Token, NewPassword });
+                }}>
                 <div className="mb-3 flex items-center">
                     <TextField
                         InputProps={{
@@ -43,7 +62,7 @@ const ChangePassword = () => {
                         autoComplete="password"
                         fullWidth
                         required
-                        value={password}
+                        value={NewPassword}
                         onChange={(e) => setPassword(e.target.value)}
                     />
                 </div>
@@ -75,7 +94,10 @@ const ChangePassword = () => {
                 <Button
                     type="submit"
                     variant="contained"
-                    style={{ display: "block", width: "100%", backgroundColor: "#030F4B", padding: "12px", marginTop: "2rem" }}
+                    style={{ display: "block", width: "100%", backgroundColor: NewPassword !== confirmPassword ? "#A9A9A9" : "#030F4B", padding: "12px", marginTop: "2rem", color: "#FFFFFF",}}
+
+                    disabled={NewPassword !== confirmPassword}
+
                 >
                     Continue
                 </Button>
@@ -87,7 +109,7 @@ const ChangePassword = () => {
                 </Typography>
             </form>
         </Publicformheader>
-
+        )
     );
 };
 

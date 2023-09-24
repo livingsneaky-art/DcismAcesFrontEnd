@@ -1,20 +1,28 @@
+import React from 'react';
 import ExpenseList from './ExpenseList';
 import ExpenseForm from './ExpenseForm';
 import { ToastContainer } from 'react-toastify';
 import Navbar from './Navbar';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
 
 const AlumniLandingPage = () => (
     <>
         <Navbar />
-        <div style={{ width: '60%', margin: 'auto' }}>
+        <Container maxWidth="md" style={{ marginTop: '2rem' }}>
             <ToastContainer />
-            <h4>New Expense</h4>
+            <Typography variant="h4" gutterBottom>
+                New Expense
+            </Typography>
             <ExpenseForm />
-            <hr style={{ border: '1px solid grey' }} />
-            <h4>Your Expenses</h4>
+            <Divider style={{ margin: '2rem 0' }} />
+            <Typography variant="h4" gutterBottom>
+                Your Expenses
+            </Typography>
             <ExpenseList />
-        </div>
+        </Container>
     </>
-
 );
+
 export default AlumniLandingPage;

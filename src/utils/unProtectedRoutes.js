@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { Navigate, Outlet } from 'react-router-dom';
 import CompanyLandingPage from '../pages/Company/CompanyLandingPage';
 import AlumniLandingPage from '../pages/Alumni/AlumniLandingPage';
+//import AlumniStatisticsPage from '../pages/Alumni/AlumniStatisticsPage';
 
 const UnprotectedRoute = () => {
   const { isSucceed, role } = useSelector((state) => state.authentication);
@@ -11,7 +12,10 @@ const UnprotectedRoute = () => {
   let content;
   switch (role) {
     case 'ALUMNI':
+      //content = <AlumniLandingPage />;
+      //content = <Navigate to="/alumni/alumniPage" />;
       content = <AlumniLandingPage />;
+      //content = <AlumniStatisticsPage />;
       break;
     case 'COMPANY':
       content = <CompanyLandingPage />;
@@ -20,7 +24,7 @@ const UnprotectedRoute = () => {
       content = <Navigate to="/dashboard" />;
       break;
     default:
-      content = <Navigate to="/dashboard" />;
+      content = <Outlet />;
       break;
   }
 

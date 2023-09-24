@@ -23,7 +23,11 @@ import UnprotectedRoute from './utils/unProtectedRoutes';
 import ProtectedRoute from './utils/protectedRoute';
 import AnnouncementForm from './components/forms/AnnouncementForm';
 import Profile from './pages/Admin/Profile';
-
+import AlumniStatisticsPage from './pages/Alumni/AlumniStatisticsPage';
+import AlumniLandingPage from './pages/Alumni/AlumniLandingPage';
+//import Navbar from './pages/Alumni/Navbar';
+//import CompanyStatisticsPage from './pages/Comapny/CompanyStatisticsPage';
+//import CompanyLandingPage from './pages/Comapny/CompanyLandingPage';
 
 const App = () => {
   const { theme, toggleColorMode } = useMode();
@@ -42,15 +46,6 @@ const App = () => {
         <CssBaseline />
         <div className="app">
           <BrowserRouter>
-            {/* <Navbar /> */}
-
-            {/* 
-        <Route path="/dashboard" element={isLoggedIn ? <ChangePassword /> : <Login />} />
-        <Route path="/login" element={isLoggedIn ? <Navigate to='/dashboard' /> : <Login />} />
-        <Route path="/register" element={isLoggedIn ? <Navigate to='/dashboard' /> : <RegisterAlumni />} />
-        <Route path="*" element={<h2>Page not found!</h2>} />
-      */}
-
             <Routes>
               <Route path="*" element={<h2>Page not found!</h2>} />
 
@@ -60,7 +55,7 @@ const App = () => {
                 <Route path="/signup/alumni" element={<RegisterAlumni />} />
                 <Route path="/signup/company" element={<RegisterCompany />} />
                 <Route path="/forgotpassword" element={<ForgotPassword />} />
-                <Route path="/changepassword" element={<ChangePassword />} />
+                <Route path="/changepassword/:Token" element={<ChangePassword />} />
               </Route>
 
               <Route element={<Layout />}>
@@ -77,11 +72,25 @@ const App = () => {
                   <Route path="/addAnnouncement" element={<AnnouncementForm />} />
                   <Route path="/announcements" element={<Announcements />} />
                   <Route path="/profile" element={<Profile />} />
+                  <Route path="/alumniPage" element={<AlumniLandingPage />} />
+                  <Route path="/statistics" element={<AlumniStatisticsPage />} />
                 </Route>
               </Route>
 
+              {/* Routes for the ALUMNI role */}
+              {/*<Route element={<Navbar />}>
+                <Route element={<ProtectedRoute />}>
+                  <Route path="/alumniPage" element={<AlumniLandingPage />} />
+                  <Route path="/statistics" element={<AlumniStatisticsPage />} />
+                {/* Add more routes specific to the ALUMNI role here 
+                </Route>
+              </Route>*/}
 
-              {/* route for user  */}
+              {/* Routes for the ALUMNI role */}
+              {/* <Route path="/alumni/*" element={<AlumniNavbar />}>
+                <Route path="/dashboard" element={<AlumniDashboard />} />
+                {/* Add more routes specific to the ALUMNI role here 
+              </Route>*/}
 
             </Routes>
           </BrowserRouter>

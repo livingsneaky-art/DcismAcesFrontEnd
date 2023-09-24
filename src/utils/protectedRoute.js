@@ -2,7 +2,9 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, Outlet } from 'react-router';
 import CompanyLandingPage from '../pages/Company/CompanyLandingPage';
-import AlumniLandingPage from '../pages/Alumni/AlumniLandingPage';
+//import AlumniLandingPage from '../pages/Alumni/AlumniLandingPage';
+//import AlumniStatisticsPage from '../pages/Alumni/AlumniStatisticsPage';
+//import { Route } from 'react-router-dom';
 
 const ProtectedRoutes = () => {
   const { isSucceed, role } = useSelector((state) => state.authentication);
@@ -11,7 +13,10 @@ const ProtectedRoutes = () => {
   let content;
   switch (role) {
     case 'ALUMNI':
-      content = <AlumniLandingPage />;
+        //content = <Route exact path="/alumniPage" element={<AlumniLandingPage />} />
+        //content = <Navigate to="/alumni/alumniPage" />;
+        content = <Outlet />;
+        //content = <AlumniStatisticsPage />;
       break;
     case 'COMPANY':
       content = <CompanyLandingPage />;
