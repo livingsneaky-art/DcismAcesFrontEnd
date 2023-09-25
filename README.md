@@ -1,46 +1,40 @@
-# Getting Started with Create React App and Redux
+# Frontend README for ACES (Alumni Career and Employment System) - React + Material-UI
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+Welcome to the frontend repository of ACES (Alumni Career and Employment System), a project developed by the Department of Computer, Information Science, and Mathematics (DCISM) at the University of San Carlos (USC). ACES is designed to address the challenges of tracking alumni and improving communication within the department and its alumni network. This README will guide you through the setup and usage of the React + Material-UI frontend codebase.
 
-## Available Scripts
+## Project Overview
 
-In the project directory, you can run:
+The ACES frontend is a web application developed using React and Material-UI. It provides a user-friendly interface for alumni and job placement processes, facilitating better communication and offering personalized job recommendations for both the department and its alumni. 
 
-### `npm start`
+## Getting Started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+To get started with the ACES frontend, follow these steps:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. **Clone the Repository**: Clone this repository to your local machine using Git.
 
-### `npm test`
+```git clone <repository-url>```
+Install Dependencies: Navigate to the project directory and install the required dependencies using npm or yarn.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```cd aces-frontend-react```
+```npm install```
+Environment Configuration: Set up any environment variables or configurations required for the frontend. Check the .env file or configuration files for specific settings.
 
-### `npm run build`
+Development Server: Start the development server to run the frontend locally.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```npm start``
+Accessing the Application: Open your web browser and navigate to http://localhost:3000 to access the ACES frontend. You should now be able to explore and interact with the application.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Usage
+## The ACES frontend provides the following features:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+• User registration and authentication.
+• Alumni profile management.
+• Job search and recommendation.
+• Communication channels between the department and alumni.
+Feel free to explore and test these features to understand how ACES can benefit both alumni and the department.
 
-### `npm run eject`
+## Testing
+The frontend code is thoroughly tested using popular testing libraries compatible with React applications. You can find test scripts and documentation in the tests directory. If you encounter any issues or have feedback, please report them in the appropriate channels.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Deployment
+The frontend of ACES is typically deployed to a web hosting platform or cloud service. The deployment process may vary depending on your hosting provider. Ensure that you configure the necessary environment variables for the production environment.
