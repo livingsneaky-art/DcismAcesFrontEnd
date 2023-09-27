@@ -1,17 +1,31 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Navigate, Outlet } from 'react-router';
+import AccountVerify from '../components/accountverify/index';
+import { clearAccount } from "../app/authenticationSlice";
 
-const ProtectedRoute = ({ userRole }) => {
-  const { isSucceed, role } = useSelector((state) => state.authentication);
-
+const ProtectedRoute = ({ userRole, userVerified }) => {
+  const { isSucceed, role, isAlumni } = useSelector((state) => state.authentication);
   const isAuthorized = role === userRole;
-
-  if (!isAuthorized || !isSucceed) {
-    return <Navigate to="/" />;
+  const isVerified = isAlumni === userVerified;
+  const dispatch = useDispatch();
+  if(isAlumni === false)
+  {
+    if (!isAuthorized || !isSucceed) {
+      return <Navigate to="/" />;
+    }else {
+      return <AccountVerify />
+    }
+  }else {
+    if(isAlumni === true)
+    {
+      return <Outlet />;
+    }else {
+        dispatch(clearAccount());
+        window.location.reload();
+    }
+    
   }
-
-  return <Outlet />;
 };
 
 export default ProtectedRoute;

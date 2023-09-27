@@ -13,8 +13,9 @@ export const SignUpCompany = async (dispatch, credentials) => {
 
             dispatch(
                 userAuthenticated({
+                    isAlumni: response.data.isAlumni,
                     isSucceed: response.data.isSucceed,
-                    message: null,
+                    message: response.data.message,
                     email: response.data.email,
                     token: response.data.token,
                     firstName: response.data.firstName,
@@ -46,8 +47,9 @@ export const SignUpAlumni = async (dispatch, credentials) => {
 
             dispatch(
                 userAuthenticated({
+                    isAlumni: response.data.isAlumni,
                     isSucceed: response.data.isSucceed,
-                    message: null,
+                    message: response.data.message,
                     email: response.data.email,
                     token: response.data.token,
                     firstName: response.data.firstName,
@@ -79,8 +81,9 @@ export const SignIn = async (dispatch, credentials) => {
         if (response.data.isSucceed) {
             dispatch(
                 userAuthenticated({
+                    isAlumni: response.data.isAlumni,
                     isSucceed: response.data.isSucceed,
-                    message: null,
+                    message: response.data.message,
                     email: response.data.email,
                     token: response.data.token,
                     firstName: response.data.firstName,
@@ -109,8 +112,9 @@ export const SignUpGoogle = async (dispatch, token) => {
         if (response.data.isSucceed) {
             dispatch(
                 userAuthenticated({
+                    isAlumni: response.data.isAlumni,
                     isSucceed: response.data.isSucceed,
-                    message: null,
+                    message: response.data.message,
                     email: response.data.email,
                     token: response.data.token,
                     firstName: response.data.firstName,

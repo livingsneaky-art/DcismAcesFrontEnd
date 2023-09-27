@@ -26,9 +26,12 @@ import Profile from './pages/Admin/Profile';
 import LandingPageAlumni from './pages/Alumni/LandingPage.js';
 import Navbar from './components/topbar/navbar';
 import LandingPageCompany from './pages/Company/LandingPage';
-
+import AccountVerify from './components/accountverify';
+//import { useSelector } from 'react-redux';
+//import { logout } from '../src/app/authenticationSlice';
 
 const App = () => {
+ // const { isAlumni } = useSelector((state) => state.authentication);
   const { theme, toggleColorMode } = useMode();
 
   const colorModeContextValue = useMemo(
@@ -64,6 +67,7 @@ const App = () => {
                 <Route path="/signup/company" element={<RegisterCompany />} />
                 <Route path="/forgotpassword" element={<ForgotPassword />} />
                 <Route path="/changepassword/:Token" element={<ChangePassword />} />
+                <Route path="/accountverify" element={<AccountVerify />}  />
               </Route>
 
               <Route element={<ProtectedRoute userRole="ADMIN" />}>
@@ -84,11 +88,16 @@ const App = () => {
               </Route>
 
               {/* route for user create a layout for the alumni ang company */}
-              <Route element={<ProtectedRoute userRole="ALUMNI" />}>
+              {/* {isAlumni === true ? ( */}
+              <Route element={<ProtectedRoute userRole="ALUMNI" userVerified="true"/>}>
                 <Route element={<Navbar />}>
                   <Route path="/user_dashboard" element={<LandingPageAlumni />} />
                 </Route>
               </Route>
+              {/* // ) : (
+              //   {dispatch(logout())}
+              //   <Route path="/" element={<LandingPage />} />
+              // )} */}
 
               {/* route for company  */}
               <Route element={<ProtectedRoute userRole="COMPANY" />}>

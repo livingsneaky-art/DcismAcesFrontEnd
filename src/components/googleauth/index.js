@@ -8,7 +8,7 @@ const GoogleAuth = () => {
 
     return (
         <div className='flex w-full rounded-md shadow-md justify-center border'>
-            <GoogleOAuthProvider clientId="178866011599-ugbm9asmikn05mk1mfo1efqjgg68dl1s.apps.googleusercontent.com">
+            <GoogleOAuthProvider clientId={process.env.REACT_APP_CLIENT_ID}>
                 <div className='p-2'>
                 <GoogleLogin
                      onSuccess={credentialResponse => SignUpGoogle(dispatch, credentialResponse.credential)}
