@@ -127,7 +127,6 @@ const App = () => {
               <Route element={<UnprotectedRoute />}>
 
                   <Route path="/company/dashboard" element={<CompanyEvents />} />
-
                   <Route exact path="/company/faq" element={<CompanyFAQ />} />
                   <Route path="/company/jobs" element={<CompanyJobs />} />
                   <Route path="/company/notifications" element={<CompanyNotif />} />

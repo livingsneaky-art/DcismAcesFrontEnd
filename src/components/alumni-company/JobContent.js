@@ -5,6 +5,9 @@ export default function JobContent({ data }) {
   const location = useLocation();
 
   const isCompanyPage = location.pathname.includes("/company");
+ 
+
+
 
   return (
     <div className="flex flex-col bg-white border rounded-lg p-4 mx-4 sm:mx-0 space-y-2">
