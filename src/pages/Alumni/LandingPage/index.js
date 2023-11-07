@@ -11,19 +11,20 @@ const LandingPageAlumni = () => {
     const dispatch = useDispatch();
     const [userData, setUserData] = useState(null);
 
-    useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                const data = await GetAlumniProfile(dispatch);
-                setUserData(data);
-            } catch (error) {
-                console.error('Error fetching user profile:', error);
-            }
-        };
+    // useEffect(() => {
+    //     const fetchUserData = async () => {
+    //         try {
+    //             const data = await GetAlumniProfile(dispatch);
+    //             console.log(data);
+    //             setUserData(data);
+    //         } catch (error) {
+    //             console.error('Error fetching user profile:', error);
+    //         }
+    //     };
 
-        fetchUserData();
-        //  GetAllAnnouncements(dispatch);
-    }, [dispatch]);
+    //     fetchUserData();
+    //     //  GetAllAnnouncements(dispatch);
+    // }, [dispatch]);
 
 
     return (

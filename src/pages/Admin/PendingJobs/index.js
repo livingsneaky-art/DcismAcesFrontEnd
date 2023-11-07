@@ -22,8 +22,8 @@ const PendingJobs = () => {
     const handleAcceptJobPost = async (id) => {
         try {
             const credentials = {
-                id: id,
-                status: true
+                Id: id,
+                Status: true
             };
             await Verify_JobPost(dispatch, credentials);
             GetUnverifiedJobs(dispatch);

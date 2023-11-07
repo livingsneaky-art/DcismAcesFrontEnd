@@ -91,7 +91,8 @@ export const GetUnverifiedJobs = async (dispatch) => {
 
 export const Verify_JobPost = async (dispatch, credentials) => {
     try {
-        const response = await axiosInstance.put('/Company/Job-Posting', credentials)
+        const response = await axiosInstance.put('/Company/Verify-Job-Posting', credentials)
+        console.log(response);
         dispatch(verifyPost(response.data));
     } catch (error) {
         console.error('Error:', error);

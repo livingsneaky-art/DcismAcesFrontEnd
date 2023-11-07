@@ -11,6 +11,7 @@ import alumniUserSlice from './alumniUserSlice';
 import adminDashboardSlice from './adminDashboardSlice';
 import alumniProfileSlice from './alumniProfileSlice';
 import companyUserSlice from './companyUserSlice';
+import companyJobPostSlice from './companyJobPostSlice';
 
 export default configureStore({
   reducer: {
@@ -23,7 +24,7 @@ export default configureStore({
     companyUserSlice: companyUserSlice,
     adminDashboard: adminDashboardSlice,
     alumniProfile: alumniProfileSlice,
-
+    createJob: companyJobPostSlice,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(ToastMiddleware, thunk),
 });
