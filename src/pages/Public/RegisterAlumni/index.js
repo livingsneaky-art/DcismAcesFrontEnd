@@ -49,14 +49,6 @@ const RegisterAlumni = () => {
     const handleFormSubmit = async (e) => {
         e.preventDefault();
 
-        // const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-
-        // if (!passwordPattern.test(password)) {
-        //     setFormData({ ...formData, passwordError: "Password must meet the criteria." });
-        //     return;
-        // } else {
-        //     setFormData({ ...formData, passwordError: "" });
-        // }
 
         if (password === formData.confirmPassword) {
             SignUpAlumni(dispatch, {

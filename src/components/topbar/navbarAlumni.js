@@ -141,12 +141,16 @@ const NavbarAlumni = ({ user }) => {
                 <p>FAQ</p>
             </MenuItem>
             <MenuItem>
-                <IconButton size="large" color="inherit">
-                    <Badge color="error" onClick={handleNotificationClick}>
+                <IconButton
+                    size="large"
+                    aria-label={`show ${notificationsAlumni && notificationsAlumni.length} new notifications`}
+                    color="inherit"
+                >
+                    <Badge color="error" badgeContent={notificationsAlumni && notificationsAlumni.length} onClick={handleNotificationClick}>
                         <Notifications />
                     </Badge>
                 </IconButton>
-                <p>Notifications</p>
+                <p>Notification</p>
             </MenuItem>
 
             <MenuItem onClick={handleProfileMenuOpen}>
@@ -280,8 +284,7 @@ const NavbarAlumni = ({ user }) => {
                         )}
                     </div>
                 </div>
-            )
-            }
+            )}
         </Box >
     );
 };

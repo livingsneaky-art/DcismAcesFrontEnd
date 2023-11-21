@@ -163,8 +163,12 @@ const NavbarCompany = ({ user }) => {
                 <p>FAQ</p>
             </MenuItem>
             <MenuItem>
-                <IconButton size="large" color="inherit">
-                    <Badge color="error" onClick={handleNotificationClick}>
+                <IconButton
+                    size="large"
+                    aria-label={`show ${notificationsCompany && notificationsCompany.length} new notifications`}
+                    color="inherit"
+                >
+                    <Badge color="error" badgeContent={notificationsCompany && notificationsCompany.length} onClick={handleNotificationClick}>
                         <Notifications />
                     </Badge>
                 </IconButton>

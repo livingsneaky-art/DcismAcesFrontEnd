@@ -115,6 +115,26 @@ const EditAlumniProfile = ({ profileData }) => {
             }));
             setEmployedError(false);
         }
+
+        if (name === 'programCode') {
+            const selectedProgram = programs.find(program => program.code === finalValue);
+            if (selectedProgram) {
+                let educationalLevel = "Bachelor";
+                if (selectedProgram.description.startsWith("Master")) {
+                    educationalLevel = "Master";
+                } else if (selectedProgram.description.startsWith("Doctor")) {
+                    educationalLevel = "Doctor";
+                }
+                setUserData(prevUserData => ({
+                    ...prevUserData,
+                    programDescription: selectedProgram.description,
+                    programCode: selectedProgram.code,
+                    educationLevel: educationalLevel,
+                }));
+            }
+        }
+
+
         if (finalValue !== '') {
             setFormValid(isFormValid);
         }
@@ -334,45 +354,47 @@ const EditAlumniProfile = ({ profileData }) => {
                         <p className="font-bold ">Academic Information</p>
                         <div className="flex items-center">
                             <label className="text-[12px] w-[100px]">Course Program: </label>
+                            <div className="flex-1">
 
-                            {(userData?.courses?.length === 0) ? (
-                                <Select
-                                    id="program"
-                                    value={userData?.programDescription || ''}
-                                    onChange={(e) => {
-                                        const selectedProgramDescription = e.target.value;
-                                        const selectedProgram = programs.find(program => program.description === selectedProgramDescription);
-                                        if (selectedProgram) {
-                                            let educationalLevel = "Bachelor";
-                                            if (selectedProgramDescription.startsWith("Master")) {
-                                                educationalLevel = "Master";
-                                            } else if (selectedProgramDescription.startsWith("Doctor")) {
-                                                educationalLevel = "Doctor";
+                                {(userData?.courses?.length === 0) ? (
+                                    <Select
+                                        id="program"
+                                        value={userData.programCode || ''} // Update this line
+                                        onChange={(e) => {
+                                            const selectedProgramDescription = e.target.value;
+                                            const selectedProgram = programs.find(program => program.description === selectedProgramDescription);
+                                            if (selectedProgram) {
+                                                let educationalLevel = "Bachelor";
+                                                if (selectedProgramDescription.startsWith("Master")) {
+                                                    educationalLevel = "Master";
+                                                } else if (selectedProgramDescription.startsWith("Doctor")) {
+                                                    educationalLevel = "Doctor";
+                                                }
+                                                setUserData({
+                                                    ...userData,
+                                                    programDescription: selectedProgram.description,
+                                                    programCode: selectedProgram.code,
+                                                    educationLevel: educationalLevel,
+                                                });
                                             }
-                                            setUserData({
-                                                ...userData,
-                                                programDescription: selectedProgram.description,
-                                                programCode: selectedProgram.code,
-                                                educationLevel: educationalLevel,
-                                            });
-                                        }
-                                    }}
-                                    variant="outlined"
-                                    fullWidth
-                                    required
-                                >
-                                    {programs.map((program) => (
-                                        <MenuItem key={program.description} value={program.description}>
-                                            {program.description}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                            ) : (
-                                <p className="font-bold">
-                                    {userData.programDescription}
-                                </p>
+                                        }}
+                                        variant="outlined"
+                                        fullWidth
+                                        required
+                                    >
+                                        {programs.map((program) => (
+                                            <MenuItem key={program.code} value={program.code}>
+                                                {program.description}
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                ) : (
+                                    <p className="font-bold">
+                                        {userData.programDescription}
+                                    </p>
 
-                            )}
+                                )}
+                            </div>
                         </div>
                         <div className="flex items-center my-2">
                             <label className="text-[12px] w-[100px]">Year Graduated: </label>

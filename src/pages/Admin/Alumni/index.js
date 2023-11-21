@@ -119,11 +119,16 @@ const Alumni = () => {
                     <IconButton onClick={() => {
                         setSelectedItemId(params.row.id);
                         setOpenDeletePopup(true);
-                    }}>
+
+                    }}
+                        disabled={params.row.isVerified}
+                    >
                         <DeleteOutline
                             style={{
                                 fontSize: "20px",
-                                color: "#e2726e"
+                                // color: "#e2726e"
+                                color: params.row.isVerified ? "#aaa" : "#e2726e",
+
                             }}
                         />
                     </IconButton>

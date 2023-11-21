@@ -14,12 +14,17 @@ body,
 
 .richTextContainer ul {
   list-style: disc;
-  padding-left: 20px; /* or list-style-type: disc; */
+  padding-left: 20px;
 }
 
 .richTextContainer ol {
   list-style-type: decimal;
-  padding-left: 20px; /* Adjust as needed */
+  padding-left: 20px;
+}
+
+.richTextContainer img {
+  width: 40rem;
+  height: 20rem;
 }
 
 /* ::-webkit-scrollbar {

@@ -69,7 +69,9 @@ const EventWithTooltip = ({ event }) => {
         >
             <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 <Box sx={{ display: "flex", flexDirection: "column", textAlign: "left" }}>
-                    <div>{event.title}</div>
+                    <div style={{ maxWidth: "100px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                        {event.title}
+                    </div>
                 </Box>
                 <Box display="flex">
                     <IconButton onClick={() => setOpenEditPopup(true)}>
