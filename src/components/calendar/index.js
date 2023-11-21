@@ -8,42 +8,42 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import EventWithTooltip from "./eventTooltip";
 
 const localizer = dateFnsLocalizer({
-    format,
-    parse,
-    startOfWeek,
-    getDay,
-    locales: {
-        "en-US": require("date-fns/locale/en-US"),
-    },
-    timeZone: "Asia/Manila",
+  format,
+  parse,
+  startOfWeek,
+  getDay,
+  locales: {
+    "en-US": require("date-fns/locale/en-US"),
+  },
+  timeZone: "Asia/Manila",
 });
 
 const views = {
-    month: true,
-    agenda: true,
-    week: false,
-    day: false,
+  month: true,
+  agenda: true,
+  week: false,
+  day: false,
 };
 
 const handleViewChange = (view) => {
-    console.log(`Switched to view: ${view}`);
+  console.log(`Switched to view: ${view}`);
 };
 
 const Calendar = ({ events }) => {
-    return (
-        <BigCalendar
-            localizer={localizer}
-            events={events}
-            startAccessor="start"
-            endAccessor="end"
-            style={{ height: 700, marginTop: "50px" }}
-            views={views}
-            onView={handleViewChange}
-            components={{
-                event: EventWithTooltip,
-            }}
-        />
-    );
+  return (
+    <BigCalendar
+      localizer={localizer}
+      events={events}
+      startAccessor="start"
+      endAccessor="end"
+      style={{ height: 700, marginTop: "50px" }}
+      views={views}
+      onView={handleViewChange}
+      components={{
+        event: EventWithTooltip,
+      }}
+    />
+  );
 };
 
 export default Calendar;

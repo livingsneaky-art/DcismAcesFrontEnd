@@ -10,7 +10,7 @@ import {
 import { useDispatch } from "react-redux";
 import {
   clearForgotPasswordRequestStatus,
-  clearAccount
+  clearAccount,
 } from "../../app/authenticationSlice";
 import { FirstPage } from "@mui/icons-material";
 
@@ -40,7 +40,8 @@ const AccountVerify = () => {
       <div style={{ marginTop: "2rem", textAlign: "center" }}>
         <Alert severity="success">
           <AlertTitle>Success</AlertTitle>
-          Wait for the department to verify your credentials. You will receive an email notification once the process is complete. —{" "}
+          Wait for the department to verify your credentials. You will receive
+          an email notification once the process is complete. —{" "}
           <strong>Wait for Verification!</strong>
         </Alert>
 
