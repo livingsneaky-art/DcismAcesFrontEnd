@@ -34,7 +34,6 @@ const NavbarAlumni = ({ user }) => {
 
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
 
@@ -46,13 +45,8 @@ const NavbarAlumni = ({ user }) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
-
   const handleMenuClose = () => {
     setAnchorEl(null);
-    handleMobileMenuClose();
   };
 
   const navigate = useNavigate();
