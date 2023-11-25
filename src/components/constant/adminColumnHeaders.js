@@ -263,7 +263,7 @@ export const verifyJobColumn = [
   },
   {
     field: "salary",
-    headerName: "Expected Salary",
+    headerName: "Salary Range",
     width: 200,
     valueGetter: (params) => {
       return params.value ? params.value : "Not Indicated";
@@ -356,7 +356,7 @@ export const ViewCandidatesColumns = [
   {
     field: "email",
     headerName: "Email",
-    flex: 2,
+    flex: 1,
     valueGetter: (params) => {
       return params.row.alumni.email;
     },

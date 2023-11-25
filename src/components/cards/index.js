@@ -39,7 +39,7 @@ const JobCard = ({ job }) => {
         </Typography>
 
         <Typography>
-          Expected Salary:{job.salary ? job.salary : "Not Indicated"}
+          Salary Range:{job.salary ? job.salary : "Not Indicated"}
         </Typography>
         <Typography>
           Skills Required:

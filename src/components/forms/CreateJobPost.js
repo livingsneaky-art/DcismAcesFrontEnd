@@ -18,7 +18,7 @@ const CreateJobPost = () => {
     salary: "",
     yearsOfExp: "",
     slots: "",
-    requireResume: false,
+    requireResume: true,
     expiration_Date: "",
     targetSkills: [{ skill: "" }],
   });
@@ -26,10 +26,10 @@ const CreateJobPost = () => {
   const navigate = useNavigate();
   const [skillsInput, setSkillsInput] = useState("");
 
-  const handleCheckboxChange = (e) => {
-    const value = e.target.checked;
-    setFormData({ ...formData, requireResume: value });
-  };
+  // const handleCheckboxChange = (e) => {
+  //   const value = e.target.checked;
+  //   setFormData({ ...formData, requireResume: value });
+  // };
 
   const handleSkillsChange = (e) => {
     setSkillsInput(e.target.value);
@@ -149,7 +149,7 @@ const CreateJobPost = () => {
                 required
               />
             </div>
-            <div className="flex items-center my-2">
+            {/* <div className="flex items-center my-2">
               <label className="text-[12px] w-[90px]">Required Resume: </label>
               <input
                 type="checkbox"
@@ -160,7 +160,7 @@ const CreateJobPost = () => {
               <label className="text-[12px] ml-2">
                 {formData.requireResume ? "Yes" : "No"}
               </label>
-            </div>
+            </div> */}
 
             <div className="flex items-center my-2">
               <label className="text-[12px] w-[100px]">Target Skills: </label>

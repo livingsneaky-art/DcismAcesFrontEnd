@@ -65,10 +65,10 @@ const EditJobPostForm = () => {
     }
   }, [id, dispatch]);
 
-  const handleCheckboxChange = (e) => {
-    const value = e.target.checked;
-    setFormData({ ...formData, requireResume: value });
-  };
+  // const handleCheckboxChange = (e) => {
+  //   const value = e.target.checked;
+  //   setFormData({ ...formData, requireResume: value });
+  // };
 
   const handleSkillsChange = (e) => {
     setSkillsInput(e.target.value);
@@ -207,7 +207,7 @@ const EditJobPostForm = () => {
                   required
                 />
               </div>
-              <div className="flex items-center my-2">
+              {/* <div className="flex items-center my-2">
                 <label className="text-[12px] w-[90px]">
                   Required Resume:{" "}
                 </label>
@@ -220,7 +220,7 @@ const EditJobPostForm = () => {
                 <label className="text-[12px] ml-2">
                   {formData.requireResume ? "Yes" : "No"}
                 </label>
-              </div>
+              </div> */}
 
               <div className="flex items-center">
                 <label className="text-[12px] w-[100px]">Target Skills: </label>
