@@ -307,8 +307,8 @@ export const ViewCandidatesColumns = [
   },
   {
     field: "img",
-    headerName: "Profile",
-    width: 100,
+    headerName: "Image",
+    width: 60,
     renderCell: (params) => {
       const imgSrc = params.row.alumni.profileImage
         ? `data:image/jpeg;base64,${params.row.alumni.profileImage}`
