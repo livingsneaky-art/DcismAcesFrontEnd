@@ -106,11 +106,8 @@ const CompanyCandidates = () => {
               variant="contained"
               size="small"
               style={{
-                backgroundColor:
-                  params.row.status || !params.row.job.isActive
-                    ? "#aaa"
-                    : "#221769",
-                color: "#dbf5ee",
+                backgroundColor: "#ffffff",
+                color: "#221769",
               }}
               onClick={() => handleViewProfile(params.row)}
               startIcon={<Visibility />}
