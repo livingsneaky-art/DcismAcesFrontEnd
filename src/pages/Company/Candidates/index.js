@@ -6,13 +6,16 @@ import {
   SendInviteCandidate,
   ViewAllCandidates,
 } from "../../../services/company";
+import CandidateModal from "../../../components/candidatemodal";
+
 import { getJobsError } from "../../../app/companyUserSlice";
+
 import { Button, CircularProgress } from "@mui/material";
 import { ViewCandidatesColumns } from "../../../components/constant/adminColumnHeaders";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { ForwardToInbox } from "@mui/icons-material";
+import { ForwardToInbox, Visibility } from "@mui/icons-material";
 
 const CompanyCandidates = () => {
   const { id } = useParams();
@@ -93,8 +96,35 @@ const CompanyCandidates = () => {
       },
     },
     {
+      field: "view",
+      headerName: "View Details",
+      width: 100,
+      renderCell: (params) => {
+        return (
+          <>
+            <Button
+              variant="contained"
+              size="small"
+              style={{
+                backgroundColor: "#ffffff",
+                color: "#221769",
+              }}
+              onClick={() => handleViewProfile(params.row)}
+              startIcon={<Visibility />}
+            >
+              {invitationLoading ? (
+                <CircularProgress size={20} color="inherit" />
+              ) : (
+                "Details"
+              )}
+            </Button>
+          </>
+        );
+      },
+    },
+    {
       field: "action",
-      headerName: "Actions",
+      headerName: "Recruitment",
       width: 100,
       renderCell: (params) => {
         return (
@@ -122,7 +152,7 @@ const CompanyCandidates = () => {
               {invitationLoading ? (
                 <CircularProgress size={20} color="inherit" />
               ) : (
-                "Invite"
+                "Recruit"
               )}
             </Button>
           </>
@@ -130,6 +160,18 @@ const CompanyCandidates = () => {
       },
     },
   ];
+
+  const [openModal, setOpenModal] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
+
+  const handleViewProfile = (user) => {
+    setSelectedUser(user);
+    setOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
 
   const filtered_candidates = candidates
     ? candidates.filter((candidate) => candidate.jobId === Number(id))
@@ -153,37 +195,60 @@ const CompanyCandidates = () => {
               {filtered_candidates.length === 0 ? (
                 <p>No candidates available.</p>
               ) : (
-                <DataGrid
-                  sx={{
-                    padding: "20px",
-                    "& .MuiDataGrid-toolbarContainer": {
-                      flexDirection: "row-reverse",
-                      color: "#221769",
-                    },
-                    "& .MuiButtonBase-root": {
-                      color: "#221769",
-                    },
-                  }}
-                  rows={filtered_candidates}
-                  columns={columns}
-                  initialState={{
-                    pagination: {
-                      paginationModel: {
-                        pageSize: 10,
+                <>
+                  <DataGrid
+                    sx={{
+                      padding: "20px",
+                      "& .MuiDataGrid-toolbarContainer": {
+                        flexDirection: "row-reverse",
+                        color: "#221769",
                       },
-                    },
-                  }}
-                  slots={{ toolbar: GridToolbar }}
-                  slotProps={{
-                    toolbar: {
-                      showQuickFilter: true,
-                      quickFilterProps: { debounceMs: 500 },
-                    },
-                  }}
-                  pageSizeOptions={[10]}
-                  checkboxSelection
-                  disableRowSelectionOnClick
-                />
+                      "& .MuiButtonBase-root": {
+                        color: "#221769",
+                      },
+                    }}
+                    rows={filtered_candidates}
+                    columns={columns}
+                    initialState={{
+                      pagination: {
+                        paginationModel: {
+                          pageSize: 10,
+                        },
+                      },
+
+                      sorting: {
+                        sortModel: [{ field: "score", sort: "desc" }],
+                      },
+
+                      columns: {
+                        columnVisibilityModel: {
+                          id: false,
+                          email: false,
+                          mobileNumber: false,
+                          candidateDate: false,
+                          explanation: false,
+                        },
+                      },
+                    }}
+                    slots={{ toolbar: GridToolbar }}
+                    slotProps={{
+                      toolbar: {
+                        showQuickFilter: true,
+                        quickFilterProps: { debounceMs: 500 },
+                      },
+                    }}
+                    pageSizeOptions={[10]}
+                    checkboxSelection
+                    disableRowSelectionOnClick
+                  />
+                  {selectedUser && (
+                    <CandidateModal
+                      open={openModal}
+                      onClose={handleCloseModal}
+                      user={selectedUser}
+                    />
+                  )}
+                </>
               )}
             </div>
           )}

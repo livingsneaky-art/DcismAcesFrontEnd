@@ -69,6 +69,9 @@ const ViewCandidates = () => {
                         pageSize: 10,
                       },
                     },
+                    sorting: {
+                      sortModel: [{ field: "score", sort: "desc" }],
+                    },
                   }}
                   slots={{ toolbar: GridToolbar }}
                   slotProps={{

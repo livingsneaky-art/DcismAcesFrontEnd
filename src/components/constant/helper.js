@@ -2,7 +2,7 @@ export const formatDate = (inputDate) => {
   const eventDate = new Date(inputDate);
   const options = {
     year: "numeric",
-    month: "long",
+    month: "numeric",
     day: "numeric",
     hour: "2-digit",
     minute: "2-digit",

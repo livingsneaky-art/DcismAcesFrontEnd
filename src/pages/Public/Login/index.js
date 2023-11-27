@@ -111,28 +111,47 @@ const Login = () => {
         >
           Login
         </Button>
-        <Typography
-          sx={{ text: "16px", marginTop: "20px", textAlign: "center" }}
-        >
-          Don't have an account? Register as
-          <span className="text-second underline px-2">
-            <NavLink
-              to="/signup/alumni"
-              onClick={() => dispatch(clearMessage())}
-            >
-              Alumni
-            </NavLink>
-          </span>
-          or
-          <span className="text-second underline px-2">
-            <NavLink
-              to="/signup/company"
-              onClick={() => dispatch(clearMessage())}
-            >
-              Company
-            </NavLink>
-          </span>
-        </Typography>
+
+        <div className="md:hidden">
+          <Typography
+            sx={{ text: "16px", marginTop: "20px", textAlign: "center" }}
+          >
+            Don't have an account? Register as
+            <span className="text-second underline px-2">
+              <NavLink
+                to="/signup/alumni"
+                onClick={() => dispatch(clearMessage())}
+              >
+                Alumni
+              </NavLink>
+            </span>
+          </Typography>
+        </div>
+
+        <div className="hidden md:block">
+          <Typography
+            sx={{ text: "16px", marginTop: "20px", textAlign: "center" }}
+          >
+            Don't have an account? Register as
+            <span className="text-second underline px-2">
+              <NavLink
+                to="/signup/alumni"
+                onClick={() => dispatch(clearMessage())}
+              >
+                Alumni
+              </NavLink>
+            </span>
+            or
+            <span className="text-second underline px-2">
+              <NavLink
+                to="/signup/company"
+                onClick={() => dispatch(clearMessage())}
+              >
+                Company
+              </NavLink>
+            </span>
+          </Typography>
+        </div>
       </form>
     </FormWithHeader>
   );

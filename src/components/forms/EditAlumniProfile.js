@@ -27,6 +27,7 @@ const EditAlumniProfile = ({ profileData }) => {
   const [birthdayError, setBirthdayError] = useState(false);
   const [ageError, setAgeError] = useState(false);
   const [employedError, setEmployedError] = useState(false);
+  // const [resumeError, setResumeError] = useState(false);
 
   const [formValid, setFormValid] = useState(true);
   const [skillsInput, setSkillsInput] = useState("");
@@ -89,7 +90,7 @@ const EditAlumniProfile = ({ profileData }) => {
     const isGenderEmpty = name === "gender" && finalValue.trim() === "";
     const isBirthdayEmpty = name === "birthday" && finalValue.trim() === "";
     const isSYGraduated = name === "syGraduated" && finalValue.trim() === "";
-    const isMiddleNameEmpty = name === "middleName" && finalValue.trim() === "";
+    // const isMiddleNameEmpty = name === "middleName" && finalValue.trim() === "";
     const isEmployed =
       name === "isEmployed" ? value === "true" : userData.isEmployed;
     setGenderError(isGenderEmpty);
@@ -104,7 +105,7 @@ const EditAlumniProfile = ({ profileData }) => {
     }
 
     const isFormValid =
-      !isMiddleNameEmpty &&
+      // !isMiddleNameEmpty &&
       !isMobileNumberEmpty &&
       !isAlumniAddressEmpty &&
       !isBirthdayEmpty &&
@@ -281,17 +282,17 @@ const EditAlumniProfile = ({ profileData }) => {
                 <TextField
                   type="text"
                   name="middleName"
-                  placeholder="Input your Middle Name"
+                  placeholder="Input your Middle Name (Optional)"
                   value={userData?.middleName || ""}
                   onChange={handleInputChange}
                   variant="outlined"
                   fullWidth
-                  error={!formValid && userData.middleName === ""}
-                  helperText={
-                    !formValid &&
-                    userData.middleName === "" &&
-                    "Middle Name is required"
-                  }
+                  // error={!formValid && userData.middleName === ""}
+                  // helperText={
+                  //   !formValid &&
+                  //   userData.middleName === "" &&
+                  //   "Middle Name is required"
+                  // }
                   className="mb-2"
                 />
               </div>

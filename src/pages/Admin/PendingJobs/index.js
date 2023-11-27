@@ -102,7 +102,7 @@ const PendingJobs = () => {
     },
     {
       field: "salary",
-      headerName: "Expected Salary",
+      headerName: "Salary Range",
       width: 200,
       valueGetter: (params) => {
         return params.value ? params.value : "Not Indicated";

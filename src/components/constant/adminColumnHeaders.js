@@ -263,7 +263,7 @@ export const verifyJobColumn = [
   },
   {
     field: "salary",
-    headerName: "Expected Salary",
+    headerName: "Salary Range",
     width: 200,
     valueGetter: (params) => {
       return params.value ? params.value : "Not Indicated";
@@ -307,8 +307,8 @@ export const ViewCandidatesColumns = [
   },
   {
     field: "img",
-    headerName: "Profile",
-    width: 100,
+    headerName: "Image",
+    width: 60,
     renderCell: (params) => {
       const imgSrc = params.row.alumni.profileImage
         ? `data:image/jpeg;base64,${params.row.alumni.profileImage}`
@@ -356,7 +356,7 @@ export const ViewCandidatesColumns = [
   {
     field: "email",
     headerName: "Email",
-    flex: 2,
+    flex: 1,
     valueGetter: (params) => {
       return params.row.alumni.email;
     },
