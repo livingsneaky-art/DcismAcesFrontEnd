@@ -1,0 +1,28 @@
+{
+  "short_name": "DCISM Aces Mobile",
+  "name": "Weather App PWA",
+  "icons": [
+    {
+      "src": "./icon_x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icon_x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icon_x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "theme_color": "#221769",
+  "background_color": "#221769",
+  "start_url": "/alumni/profile",
+  "display": "minimal-ui"
+}

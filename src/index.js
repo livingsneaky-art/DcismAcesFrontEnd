@@ -1,14 +1,14 @@
 // index.js
-import React from 'react';
-import { createRoot } from 'react-dom/client';
-import { Provider } from 'react-redux';
-import { persistor, store } from './app/store';
-import App from './App';
-import './index.css';
-import 'react-toastify/dist/ReactToastify.css';
-import { PersistGate } from 'redux-persist/integration/react';
+import React from "react";
+import { createRoot } from "react-dom/client";
+import { Provider } from "react-redux";
+import { persistor, store } from "./app/store";
+import App from "./App";
+import "./index.css";
+import "react-toastify/dist/ReactToastify.css";
+import { PersistGate } from "redux-persist/integration/react";
 
-const container = document.getElementById('root');
+const container = document.getElementById("root");
 const root = createRoot(container);
 
 root.render(
@@ -18,6 +18,5 @@ root.render(
         <App />
       </PersistGate>
     </Provider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
-
