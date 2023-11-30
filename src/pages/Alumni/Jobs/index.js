@@ -102,11 +102,10 @@ const JobList = () => {
                     <button
                       key={number}
                       onClick={() => paginate(number)}
-                      className={`${
-                        currentPage === number
+                      className={`${currentPage === number
                           ? "bg-[#221769] text-white"
                           : "bg-gray-300 text-gray-700"
-                      } font-semibold px-3 py-1 rounded-full mx-1`}
+                        } font-semibold px-3 py-1 rounded-full mx-1`}
                     >
                       {number}
                     </button>
@@ -147,7 +146,7 @@ const JobList = () => {
                         title="Years of Exp"
                         desc={appliedJob.job.yearsOfExp}
                       />
-                      <Content title="Salary" desc={appliedJob.job.salary} />
+                      <Content title="Salary Range" desc={appliedJob.job.salary} />
                       <div className="flex flex-col">
                         <Content title="Slots" desc={appliedJob.job.slots} />
                         <p

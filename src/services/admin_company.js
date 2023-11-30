@@ -85,9 +85,9 @@ export const Verify_JobPost = async (dispatch, credentials) => {
   }
 };
 
-export const RejectJobPost = async (dispatch, id) => {
+export const RejectJobPost = async (dispatch, id, message) => {
   try {
-    await axiosInstance.delete(`/Company/Reject-Job-Posting/${id}`);
+    await axiosInstance.delete(`/Company/Reject-Job-Posting/${id}`, message);
     dispatch(rejectPost(id));
     toast.success("Job Post deleted successfully");
   } catch {
@@ -95,6 +95,26 @@ export const RejectJobPost = async (dispatch, id) => {
     toast.error("An error occurred while deleting the announcement");
   }
 };
+
+// export const RejectJobPost = async (dispatch, id, message) => {
+//   try {
+//     await axiosInstance({
+//       method: 'delete',
+//       url: `/Company/Reject-Job-Posting/${id}`,
+//       data: { "message": message }, // Update the data structure
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//     });
+
+//     dispatch(rejectPost(id));
+//     toast.success("Job Post deleted successfully");
+//   } catch {
+//     dispatch(rejectCompanyError());
+//     toast.error("An error occurred while deleting the announcement");
+//   }
+// };
+
 
 export const ViewAllCandidates = async (dispatch, id) => {
   try {

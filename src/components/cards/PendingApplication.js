@@ -16,7 +16,7 @@ export default function PendingApplication({ data, user }) {
       <Content title="Company" desc={data?.company?.companyName} />
       <Content title="Location" desc={data?.location} />
       <Content title="Years of Exp" desc={data?.yearsOfExp} />
-      <Content title="Salary" desc={data?.salary} />
+      <Content title="Salary Range" desc={data?.salary} />
 
       <div className="flex flex-col">
         <Content title="Slots" desc={data?.slots} />

@@ -103,6 +103,9 @@ export default function ViewJobAlumni() {
                 Slots: <span className="font-bold">{jobData.slots} </span>
               </p>
               <p className="text-xs md:text-sm text-slate-500">
+                Salary Range: <span className="font-bold">{jobData.salary} </span>
+              </p>
+              <p className="text-xs md:text-sm text-slate-500">
                 Years of Experience:{" "}
                 <span className="font-bold">{jobData.yearsOfExp} </span>
               </p>
@@ -137,7 +140,9 @@ export default function ViewJobAlumni() {
                 jobData.company.mobileNumber &&
                 jobData.company.email && (
                   <p className="text-xs md:text-sm text-slate-500 mt-3">
-                    To apply for this position, you can reach out to{" "}
+                    This job requires  <span className="font-bold">
+                      Resume
+                    </span>. To apply for this position, you can reach out to{" "}
                     {jobData.company.companyName}, located at {""}
                     <span className="font-bold">
                       {jobData.company.companyAddress}

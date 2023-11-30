@@ -7,12 +7,12 @@ import {
   RejectJobPost,
   Verify_JobPost,
 } from "../../../services/admin_company";
-import ConfirmationDialog from "../../../components/popup/confirmationDialog";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { formatDate } from "../../../components/constant/helper";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import ViewJobAdmin from "../Jobs/job";
+import ConfirmationDialogReason from "../../../components/popup/confirmationDialogwithReason";
 
 const PendingJobs = () => {
   const posts = useSelector((state) => state.companiesSlice.posts);
@@ -35,7 +35,6 @@ const PendingJobs = () => {
     try {
       const credentials = {
         id: id,
-        // status: true,
       };
       await Verify_JobPost(dispatch, credentials);
       await GetJobPosts(dispatch);
@@ -44,8 +43,9 @@ const PendingJobs = () => {
     }
   };
 
-  const handleDelete = (id) => {
-    RejectJobPost(dispatch, id)
+  const handleDelete = (id, message) => {
+    // console.log(message, id);
+    RejectJobPost(dispatch, id, message)
       .then(() => {
         setDeleteOccurred(true);
       })
@@ -256,12 +256,12 @@ const PendingJobs = () => {
         </Fade>
       </Modal>
 
-      <ConfirmationDialog
+      <ConfirmationDialogReason
         open={openDeletePopup}
         onClose={() => setOpenDeletePopup(false)}
-        onConfirm={() => {
+        onConfirm={(reason) => {
           if (selectedItemId) {
-            handleDelete(selectedItemId);
+            handleDelete(selectedItemId, reason);
           }
         }}
       />
