@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, Fade, Modal, Typography } from "@mui/material";
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Fade, Modal, TextField, Typography } from "@mui/material";
 import Header from "../../../components/header";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -12,13 +12,13 @@ import "react-toastify/dist/ReactToastify.css";
 import { formatDate } from "../../../components/constant/helper";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import ViewJobAdmin from "../Jobs/job";
-import ConfirmationDialogReason from "../../../components/popup/confirmationDialogwithReason";
 
 const PendingJobs = () => {
   const posts = useSelector((state) => state.companiesSlice.posts);
   const [openDeletePopup, setOpenDeletePopup] = useState(false);
   const [selectedItemId, setSelectedItemId] = useState(null);
   const [deleteOccurred, setDeleteOccurred] = useState(false);
+  const [message, setMessage] = useState('');
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -43,17 +43,20 @@ const PendingJobs = () => {
     }
   };
 
-  const handleDelete = (id, message) => {
-    // console.log(message, id);
-    RejectJobPost(dispatch, id, message)
-      .then(() => {
-        setDeleteOccurred(true);
-      })
-      .catch((error) => {
-        console.error("Error deleting announcement:", error);
-      });
-
+  const handleConfirm = async (id, confirmMessage) => {
+    try {
+      const data = {
+        id: id,
+        message: confirmMessage
+      }
+      await RejectJobPost(dispatch, data);
+      await GetJobPosts(dispatch);
+      setDeleteOccurred(true);
+    } catch (error) {
+      console.error("Error:", error);
+    }
     setOpenDeletePopup(false);
+    setMessage('');
   };
 
   useEffect(() => {
@@ -256,15 +259,46 @@ const PendingJobs = () => {
         </Fade>
       </Modal>
 
-      <ConfirmationDialogReason
+      <Dialog
         open={openDeletePopup}
         onClose={() => setOpenDeletePopup(false)}
-        onConfirm={(reason) => {
-          if (selectedItemId) {
-            handleDelete(selectedItemId, reason);
-          }
-        }}
-      />
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">Confirm Delete</DialogTitle>
+        <DialogContent>
+          <Typography variant="body1">
+            Are you sure you want to delete this item?
+          </Typography>
+          <TextField
+            label="Reason for deletion"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            multiline
+            rows={3}
+            variant="outlined"
+            fullWidth
+            margin="normal"
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpenDeletePopup(false)} color="primary">
+            Cancel
+          </Button>
+          <Button
+            onClick={() => {
+              if (selectedItemId && message.trim() !== '') {
+                handleConfirm(selectedItemId, message);
+              }
+            }}
+            color="primary"
+            autoFocus
+            disabled={selectedItemId && message.trim() === ''}
+          >
+            Confirm
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 };
